@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Speeder</title>
+  <style>
+    body { font-size: 48px; text-align: center; margin-top: 15%; }
+    #word { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div id="word">กำลังเริ่ม...</div>
+
+  <button onclick="togglePause()">⏸ / ▶️</button>
+  <button onclick="speedUp()">+</button>
+  <button onclick="speedDown()">-</button>
+
+  <script>
+    const words = {{ words|safe }};
+    let index = 0;
+    let paused = false;
+    let delay = 600;
+
+    function showWord() {
+      if (paused || index >= words.length) return;
+      document.getElementById('word').innerText = words[index];
+      index++;
+    }
+
+    function togglePause() {
+      paused = !paused;
+    }
+
+    function speedUp() {
+      delay = Math.max(100, delay - 100);
+    }
+
+    function speedDown() {
+      delay += 100;
+    }
+
+    setInterval(() => {
+      if (!paused && index < words.length) {
+        showWord();
+      }
+    }, delay);
+  </script>
+</body>
+</html>

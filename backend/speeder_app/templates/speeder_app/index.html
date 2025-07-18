@@ -1,0 +1,6 @@
+<form action="{% url 'speeder_play' %}" method="post">
+  {% csrf_token %}
+  <textarea name="text" rows="6" cols="60" placeholder="พิมพ์ข้อความที่นี่..."></textarea>
+  <br>
+  <button type="submit">เริ่ม Speeder</button>
+</form>
